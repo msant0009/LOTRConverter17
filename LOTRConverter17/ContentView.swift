@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var showExchangeInfo = false
+    
     var body: some View {
         ZStack{
             //Background image
@@ -86,19 +88,24 @@ struct ContentView: View {
                 Spacer()
                 
                 //info button
-                Button {
+            
+                HStack {
+                    Spacer()
                     
-                } label: {
-                    Image(systemName: "info.circle.fill")
-                    .font(.largeTitle)
-                    .foregroundStyle(.white)
+                    Button {
+                        showExchangeInfo.toggle()
+                        
+                    } label: {
+                        Image(systemName: "info.circle.fill")
+                            .font(.largeTitle)
+                            .foregroundStyle(.white)
+                    }
+                    .padding(.trailing)
                 }
                 
-                
-
-                
+            
             }
-       //     .border(.blue)// for debug to see outline of VStack in live mode
+    //        .border(.blue)// for debug to see outline of VStack in live mode
             
             
         }
