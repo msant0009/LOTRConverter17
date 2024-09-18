@@ -86,9 +86,16 @@ struct ContentView: View {
                 Spacer()
                 
                 //info button
-                Image(systemName: "info.circle.fill")
+                Button {
+                    
+                } label: {
+                    Image(systemName: "info.circle.fill")
                     .font(.largeTitle)
                     .foregroundStyle(.white)
+                }
+                
+                
+
                 
             }
        //     .border(.blue)// for debug to see outline of VStack in live mode
