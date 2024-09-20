@@ -20,7 +20,7 @@ struct SelectCurrency: View {
             
             VStack{
                 // text
-                Text("Select the currency you are starting with")
+                Text("Select the currency you are starting with: \(Currency.silverPenny.rawValue)")
                     .fontWeight(.bold)
                     
                 
