@@ -7,13 +7,20 @@
 
 import SwiftUI
 
-enum Currency: Double {
+// caseIterable creates an array of the enums
+enum Currency: Double, CaseIterable, Identifiable {
+    
+    
     case copperPenny = 6400
     case silverPenny = 64
     case silverPiece = 16
     case goldPenny = 4
     case goldPiece = 1
-   
+    
+    // var id: Double {rawValue} // id property makes the values identifiable
+    // OR - either one works
+    var id: Currency {self} // id property makes the values identifiable
+    
     var image: ImageResource {
         switch self {
         case .copperPenny:

@@ -26,13 +26,12 @@ struct SelectCurrency: View {
                 
                 //currency icons
                 LazyVGrid(columns: [GridItem(), GridItem(), GridItem()]) {
-                    ForEach(0..<5) { _ in
-                        CurrencyIcon(currencyImage: .copperpenny, currencyName: "Copper Penny")
+                    ForEach(Currency.allCases) { currency in
+                        CurrencyIcon(currencyImage: currency.image, currencyName: currency.name)
                         
                     }
-                    
-                    
                 }
+                .padding()
                 
                 //text
                 Text("Select the currency you would like to convert to")
@@ -41,6 +40,12 @@ struct SelectCurrency: View {
                 
                 
                 //currency icons
+                LazyVGrid(columns: [GridItem(), GridItem(), GridItem()]) {
+                    ForEach(Currency.allCases) { currency in
+                        CurrencyIcon(currencyImage: currency.image, currencyName: currency.name)
+                        
+                    }
+                }
                 
                 //done button
                 Button("Done"){
