@@ -126,7 +126,7 @@ struct ContentView: View {
                         ExchangeInfo()
                     }
                     .sheet(isPresented: $showselectCurrency) {
-                        SelectCurrency(topCurrency: leftCurrency,bottomCurrency: rightCurrency)
+                        SelectCurrency(topCurrency: $leftCurrency,bottomCurrency: $rightCurrency)
                     }
                 }
                 
