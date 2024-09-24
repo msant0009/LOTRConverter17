@@ -9,7 +9,9 @@ import SwiftUI
 
 struct SelectCurrency: View {
     @Environment(\.dismiss) var dismiss
-    @State var currency: Currency // selected currency
+    @State var topCurrency = Currency.silverPenny
+    @State var bottomCurrency = Currency.goldPenny
+
     
     var body: some View {
         ZStack{
@@ -26,28 +28,7 @@ struct SelectCurrency: View {
                     
                 
                 //currency icons
-                LazyVGrid(columns: [GridItem(), GridItem(), GridItem()]) {
-                    ForEach(Currency.allCases) { currency in
-                        if self.currency == currency {// or wecould have used a different name for selected currency, then self. not needed
-                            
-                            CurrencyIcon(currencyImage: currency.image, currencyName: currency.name)
-                                .shadow(color: .black, radius: 10)
-                                .overlay {
-                                    RoundedRectangle(cornerRadius: 25)
-                                        .stroke(lineWidth: 3)
-                                        .opacity(0.5)
-                                }
-                            
-                        } else {
-                            CurrencyIcon(currencyImage: currency.image, currencyName: currency.name)
-                                .onTapGesture {
-                                    self.currency = currency
-                                }
-                            
-                            
-                        }
-                    }
-                }
+                IconGrid(currency: topCurrency)
 
                 
                 //text
@@ -57,6 +38,7 @@ struct SelectCurrency: View {
                 
                 
                 //currency icons
+                IconGrid(currency: bottomCurrency)
 
                 
                 //done button
@@ -85,5 +67,5 @@ struct SelectCurrency: View {
 }
 
 #Preview {
-    SelectCurrency(currency: .silverPiece)
+    SelectCurrency()
 }
