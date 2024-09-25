@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import TipKit
 
 struct ContentView: View {
     @State var showExchangeInfo = false
@@ -63,13 +64,15 @@ struct ContentView: View {
                         .onTapGesture {
                             showselectCurrency.toggle()
                         }
+                        .popoverTip(CurrencyTip(), arrowEdge: .bottom)
+                        
                         
                         //text field
                         TextField("Amount", text: $leftAmount)
                             .textFieldStyle(.roundedBorder)
                             .focused($leftTyping)
                             .keyboardType(.decimalPad)
- 
+                        
                     }
                     
                     //equal sign
@@ -78,7 +81,7 @@ struct ContentView: View {
                         .foregroundStyle(.white)
                         .symbolEffect(.pulse)
                     
- 
+                    
                     //right conversion section
                     VStack{
                         //currency
@@ -105,7 +108,7 @@ struct ContentView: View {
                             .multilineTextAlignment(.trailing)
                             .focused($rightTyping)
                             .keyboardType(.decimalPad)
-
+                        
                         
                     }
                 }
@@ -116,7 +119,7 @@ struct ContentView: View {
                 Spacer()
                 
                 //info button
-
+                
                 HStack {
                     Spacer()
                     
@@ -129,6 +132,14 @@ struct ContentView: View {
                             .foregroundStyle(.white)
                     }
                     .padding(.trailing)
+                    
+                }
+                
+            }
+            
+            .task {
+                try? Tips.configure()
+            }
                     
                     .onChange(of: leftAmount) {
                         if leftTyping {
@@ -169,8 +180,8 @@ struct ContentView: View {
     //        .border(.blue)// for debug to see outline of VStack in live mode
             
             
-        }
-    }
+  //      }
+  //  }
 }
 
 #Preview {
