@@ -68,13 +68,8 @@ struct ContentView: View {
                         TextField("Amount", text: $leftAmount)
                             .textFieldStyle(.roundedBorder)
                             .focused($leftTyping)
-                            .onChange(of: leftAmount) {
-                                if leftTyping {
-                                    rightAmount =
-                                    leftCurrency.convert(leftAmount, to: rightCurrency)
-                                }
-                            }
-                    
+                            .keyboardType(.decimalPad)
+ 
                     }
                     
                     //equal sign
@@ -109,13 +104,8 @@ struct ContentView: View {
                             .textFieldStyle(.roundedBorder)
                             .multilineTextAlignment(.trailing)
                             .focused($rightTyping)
-                            .onChange(of: rightAmount) {
-                                if rightTyping {
-                                    leftAmount =
-                                    rightCurrency.convert(rightAmount, to: leftCurrency)
-                                }
-                            }
-                             
+                            .keyboardType(.decimalPad)
+
                         
                     }
                 }
@@ -139,6 +129,32 @@ struct ContentView: View {
                             .foregroundStyle(.white)
                     }
                     .padding(.trailing)
+                    
+                    .onChange(of: leftAmount) {
+                        if leftTyping {
+                            rightAmount =
+                            leftCurrency.convert(leftAmount, to: rightCurrency)
+                        }
+                    }
+                    
+                    .onChange(of: rightAmount) {
+                        if rightTyping {
+                            leftAmount =
+                            rightCurrency.convert(rightAmount, to: leftCurrency)
+                        }
+                    }
+                    
+                    .onChange(of: leftCurrency) {
+                        leftAmount =
+                        rightCurrency.convert(rightAmount, to: leftCurrency)
+                    }
+                    
+                    .onChange(of: rightCurrency) {
+                        rightAmount =
+                        leftCurrency.convert(leftAmount, to: rightCurrency)
+                    }
+                    
+                    
                     // .sheet can be placed anywhere in the contentView
                     .sheet(isPresented: $showExchangeInfo) {
                         ExchangeInfo()
