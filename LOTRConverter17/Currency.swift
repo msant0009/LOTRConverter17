@@ -18,7 +18,7 @@ enum Currency: Double, CaseIterable, Identifiable {
     case goldPiece = 1
     
     // var id: Double {rawValue} // id property makes the values identifiable
-    // OR - either one works
+    // or this way:
     var id: Currency {self} // id property makes the values identifiable
     
     var image: ImageResource {
@@ -53,6 +53,18 @@ enum Currency: Double, CaseIterable, Identifiable {
             
             
         }
+    
+    func convert(amountString: String, currency: Currency) -> String {
+        guard let doubleAmount = Double(amountString) else {
+            return ""
+        }
+        
+        let convertedAmount = (doubleAmount / self.rawValue) * currency.rawValue
+                
+        return String(format: "%.2f", convertedAmount)
+        
+    }
+    
         
 }
 
