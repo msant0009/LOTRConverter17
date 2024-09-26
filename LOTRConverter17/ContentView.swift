@@ -16,6 +16,7 @@ struct ContentView: View {
     
     @FocusState var leftTyping // use to eliminate text field crosstalk
     @FocusState var rightTyping
+    @FocusState private var keyboardShown: Bool
     
     @State var leftCurrency: Currency = .silverPiece
     @State var rightCurrency: Currency = .goldPiece
@@ -72,6 +73,8 @@ struct ContentView: View {
                             .textFieldStyle(.roundedBorder)
                             .focused($leftTyping)
                             .keyboardType(.decimalPad)
+                            .focused($keyboardShown) // save info if keyboard opened
+                        
                         
                     }
                     
@@ -108,6 +111,7 @@ struct ContentView: View {
                             .multilineTextAlignment(.trailing)
                             .focused($rightTyping)
                             .keyboardType(.decimalPad)
+                            .focused($keyboardShown) // save info if keyboard opened
                         
                         
                     }
@@ -117,6 +121,7 @@ struct ContentView: View {
                 .clipShape(.capsule)
                 
                 Spacer()
+ 
                 
                 //info button
                 
@@ -140,6 +145,11 @@ struct ContentView: View {
             .task {
                 try? Tips.configure()
             }
+            
+            .contentShape(Rectangle()) // without this tap to dismiss on Spacer does not work
+            .onTapGesture(count: keyboardShown ? 1 : .max, perform: { // if keyboard shown use single tap to close it, otherwise set .max to not interfere with other stuff
+                keyboardShown = false
+            })
                     
                     .onChange(of: leftAmount) {
                         if leftTyping {
@@ -175,7 +185,8 @@ struct ContentView: View {
                     }
                 }
                 
-            
+        
+        
             }
     //        .border(.blue)// for debug to see outline of VStack in live mode
             

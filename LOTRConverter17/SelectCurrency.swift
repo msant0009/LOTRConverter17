@@ -23,8 +23,9 @@ struct SelectCurrency: View {
             
             VStack{
                 // text
-                Text("Select the currency you are starting with: \(Currency.silverPenny.rawValue)")
+                Text("Select the currency you are starting with")
                     .fontWeight(.bold)
+                    .font(.largeTitle)
                     
                 
                 //currency icons
@@ -34,6 +35,7 @@ struct SelectCurrency: View {
                 //text
                 Text("Select the currency you would like to convert to")
                     .fontWeight(.bold)
+                    .font(.largeTitle)
                     
                 
                 
